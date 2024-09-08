@@ -11,20 +11,20 @@ WIDTH, HEIGHT = 1280, 720
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 # Background
-background = pygame.image.load('bg.jpg')
+background = pygame.image.load('assets/bg.jpg')
 background = pygame.transform.scale(background, (WIDTH, HEIGHT))
 
 # Sound
-mixer.music.load("music.mp3")
+mixer.music.load("assets/music.mp3")
 mixer.music.play(-1)
 
 # Caption and Icon
 pygame.display.set_caption("Space Invader")
-icon = pygame.image.load('space.png')
+icon = pygame.image.load('assets/space.png')
 pygame.display.set_icon(icon)
 
 # Player
-playerImg = pygame.image.load('player.png')
+playerImg = pygame.image.load('assets/player.png')
 playerImg = pygame.transform.scale(playerImg, (64, 64))
 playerX = WIDTH // 2
 playerY = HEIGHT - 100
@@ -40,14 +40,14 @@ enemySpeed = []
 num_of_enemies = 6
 
 for i in range(num_of_enemies):
-    enemyImg.append(pygame.image.load(f'ships/ship ({i+1}).png'))
+    enemyImg.append(pygame.image.load(f'assets/ships/ship ({i+1}).png'))
     enemyImg[i] = pygame.transform.scale(enemyImg[i], (64, 64))
     enemyX.append(random.randint(0, WIDTH - 64))
     enemyY.append(random.randint(50, 200))
     enemySpeed.append(0.5)
 
 # Bullet
-bulletImg = pygame.image.load('bullet.png')
+bulletImg = pygame.image.load('assets/bullet.png')
 bulletX = 0
 bulletY = 0
 bulletSpeed = 10
@@ -148,7 +148,7 @@ while running:
             explosionSound = mixer.Sound("explosion.wav")
             explosionSound.play()
             # play the explosion image
-        
+
             bulletY = playerY
             # change the enemy image to explosion
             bullet_state = "ready"
