@@ -1,7 +1,9 @@
 import math
 import random
+from os.path import join
 import pygame
 from pygame import mixer
+
 
 # Initialize pygame
 pygame.init()
@@ -11,7 +13,7 @@ WIDTH, HEIGHT = 1280, 720
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 # Background
-background = pygame.image.load('assets/bg.jpg')
+background = pygame.image.load(join("assets", "bg.png"))
 background = pygame.transform.scale(background, (WIDTH, HEIGHT))
 
 # Sound
@@ -20,11 +22,11 @@ mixer.music.play(-1)
 
 # Caption and Icon
 pygame.display.set_caption("Space Invader")
-icon = pygame.image.load('assets/space.png')
+icon = pygame.image.load(join('assets', 'space.png'))
 pygame.display.set_icon(icon)
 
 # Player
-playerImg = pygame.image.load('assets/player.png')
+playerImg = pygame.image.load(join('assets', 'player.png'))
 playerImg = pygame.transform.scale(playerImg, (64, 64))
 playerX = WIDTH // 2
 playerY = HEIGHT - 100
@@ -40,14 +42,15 @@ enemySpeed = []
 num_of_enemies = 6
 
 for i in range(num_of_enemies):
-    enemyImg.append(pygame.image.load(f'assets/ships/ship ({i+1}).png'))
+    enemyImg.append(pygame.image.load(
+        join('assets/ships', f'ship ({i+1}).png')))
     enemyImg[i] = pygame.transform.scale(enemyImg[i], (64, 64))
     enemyX.append(random.randint(0, WIDTH - 64))
     enemyY.append(random.randint(50, 200))
     enemySpeed.append(0.5)
 
 # Bullet
-bulletImg = pygame.image.load('assets/bullet.png')
+bulletImg = pygame.image.load(join('assets', 'bullet.png'))
 bulletX = 0
 bulletY = 0
 bulletSpeed = 10
@@ -111,7 +114,7 @@ while running:
             if event.key == pygame.K_DOWN:
                 playerY_change = player_speed
             if event.key == pygame.K_SPACE and bullet_state == "ready":
-                bulletSound = mixer.Sound("laser.wav")
+                bulletSound = mixer.Sound(join("assets", "laser.wav"))
                 bulletSound.play()
                 bulletX = playerX
                 bulletY = playerY
@@ -145,7 +148,7 @@ while running:
 
         # Collision
         if is_collision(enemyX[i], enemyY[i], bulletX, bulletY):
-            explosionSound = mixer.Sound("explosion.wav")
+            explosionSound = mixer.Sound(join("assets", "explosion.wav"))
             explosionSound.play()
             # play the explosion image
 
